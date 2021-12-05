@@ -13,21 +13,22 @@ using namespace std;
 bool logged = false;
 Profesionales logg;
 
+
 void login(FILE *prof);
+void Lista(FILE *turnos);
 
 main(){
+	setlocale(LC_ALL, "spanish");
 	int op;
 	FILE *prof;
 	FILE *usr;
 	FILE *client;
 	FILE *turnos;
-	
-	setlocale(LC_ALL, "spanish");
 	system("cls");
     printf("Modulo Espacios\n");
     printf("=========================\n");
     if(!logged){
-    	printf("No inicio sesion\n");
+    	printf("No inicio sesión\n");
 	}
 	else{
 		printf("Usuario Actual: %s\n\n\n\n", logg.apenom);
@@ -47,7 +48,9 @@ main(){
 			break;
 		}
 		case 2:{
-			
+			system("cls");
+    		Lista(turnos);
+    		main();
 			break;
 		}
 		case 3:{
@@ -68,6 +71,45 @@ main(){
 	}
 	
 	return 0;
+}
+
+void Lista(FILE *turnos){	
+	if(logged){
+		system("cls");
+		turnos = fopen("Turnos.dat","r+b");
+		if(turnos == NULL){
+			printf("No se pudo abrir el archivo\n");
+		}
+		else{
+			printf("Lista de turnos\n");
+			printf("=========================\n");
+			Turnos trn;
+			rewind(turnos);
+			int s=0;
+			fread(&trn, sizeof(Turnos), 1, turnos);
+			while(!feof(turnos)){
+				printf("ID del profesional: ");
+				printf("%d", trn.idp);
+				printf("\nFecha del turno: %d/%d/%d", trn.fec.dia, trn.fec.mes, trn.fec.anio);
+				printf("\nDNI del cliente: %d", trn.dni);
+				printf("\nDetalle de la visita: ");
+				puts(trn.detalle);
+				fread(&trn, sizeof(Turnos), 1, turnos);
+				printf("\n\n");
+			}
+		}
+		fclose(turnos);
+		printf("\n\n");
+		system("pause");
+  	}
+	else{
+    system("cls");
+    printf("ERROR: usted no inicio sesión\n");
+	printf("=========================\n");
+    system("pause");
+  	}
+  	system("pause");
+  	fclose(turnos);
 }
 
 void login(FILE *prof){
