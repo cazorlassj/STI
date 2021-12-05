@@ -16,6 +16,7 @@ struct Profesionales{
 	int dni;
 	char tel[25];
 	int rank;
+	Usuarios User;
 };
 
 struct Cliente{
