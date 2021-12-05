@@ -13,12 +13,16 @@ Usuarios logg;
 
 void login(FILE *usr);
 void regClient(FILE *cliente);
+void regTurn(FILE *turnos, FILE *prof);
+void Listado(FILE *turnos);
 int cantclient = 0;
 
 main(){
 	int op;
 	FILE *usr;
 	FILE *cliente;
+	FILE *prof;
+	FILE *turnos;
 	setlocale(LC_ALL, "spanish");
 	system("cls");
     printf("Modulo del recepcionista\n");
@@ -50,11 +54,15 @@ main(){
 			break;
 		}
 		case 3:{
-			
+			system("cls");
+    		regTurn(turnos, prof);
+    		main();
 			break;
 		}
 		case 4:{
-			
+			system("cls");
+    		Listado(turnos);
+    		main();
 			break;
 		}
 		case 5:{
@@ -70,6 +78,117 @@ main(){
 		}
 	}
 	return 0;
+}
+
+void Listado(FILE *turnos){
+	if(logged){
+    	turnos = fopen("Turnos.dat", "r+b");
+    if(turnos == NULL){
+      	printf ("ERROR: No se pudo abrir el archivo Turnos.dat");
+    }
+	else{
+      	system("cls");
+      	Turnos turns;
+      	Profesionales pro;
+      	rewind(turnos);
+      	fread(&turns, sizeof(Turnos), 1, turnos);
+      	while (!feof(turnos)) {
+        	printf("ID del profesional: %d\n", turns.idp);
+        	printf("Dia del turno: %d/%d/%d\n", turns.fec.dia, turns.fec.mes, turns.fec.anio);
+        	printf("Detalle del turno: ");
+        	puts(turns.detalle);
+        	printf("\n\n");
+        	fread(&turns, sizeof(Turnos), 1, turnos);
+      	}
+    }
+
+  	} 
+	else{
+	    system("cls");
+		printf("ERROR: usted no inicio sesión\n");
+		printf("=========================\n");
+		system("pause");
+  	}
+  	fclose(turnos);
+  	system("pause");
+}
+
+void regTurn(FILE *turnos, FILE *prof){
+	if(cantclient > 0){
+    	if(logged){
+	      	system("cls");
+	      	turnos = fopen("Turnos.dat", "a+b");
+	      	prof = fopen("Profesionales.dat", "r+b");
+	    	if(prof == NULL){
+	       		printf ("ERROR: No se pudo abrir el archivo Profesionales.dat");
+	      	}
+	      	if(turnos == NULL){
+	        	printf ("ERROR: No se pudo abrir el archivo Turnos.dat");
+	      	}
+      		else{
+	        int match3 = 0;
+	        Turnos turns;
+	        Profesionales pro;
+	        system("cls");
+	        printf("Registrar Turno\n");
+	        printf("=========================\n");
+	        rewind(prof);
+	        fread(&pro, sizeof(Profesionales), 1, prof);
+	        printf("Profesionales: \n");
+	        while (!feof(prof)){
+	          printf("Apellido y nombre: ");
+	          puts(pro.apenom);
+	          printf("ID de profesional: %d\n\n", pro.idp);
+	          fread(&pro, sizeof(Profesionales), 1, prof);
+	        }
+	        printf("\nIngrese la ID del profesional: ");
+	        scanf("%d", &turns.idp);
+	        rewind(prof);
+	        while (!feof(prof)){
+	        	if(turns.idp == pro.idp){
+	            	match3++;
+	          	}
+	          	fread(&pro, sizeof(Profesionales), 1, prof);
+	        }
+	        if(match3 > 0){
+	          	printf("\nIngrese la fecha del turno");
+	          	printf("\nDia: ");
+	          	scanf("%d", &turns.fec.dia);
+	          	printf("\nMes: ");
+	          	scanf("%d", &turns.fec.mes);
+	          	printf("\nAño: ");
+	          	scanf("%d", &turns.fec.anio);
+	          	printf("Ingrese el DNI del dueño de la mascota: ");
+	          	scanf("%d", &turns.dni);
+	          	printf("Ingrese el detalle de la atencion: ");
+	          	_flushall();
+	          	gets(turns.detalle);
+	          	fwrite(&turns, sizeof(Turnos), 1, turnos);
+	        }
+	        else{
+	          	system("cls");
+	          	printf("\nLa ID de profesional ingresada no existe.\n");
+	          	system("pause");
+	        }
+	    }
+	    	fclose(turnos);
+	    	fclose(prof);
+	    	printf("\n\n");
+	      	system("pause");
+	    }
+		else{
+		    system("cls");
+		    printf("ERROR: usted no inicio sesión\n");
+			printf("=========================\n");
+		    system("pause");
+	  	}
+		}
+		else{
+			system("cls");
+		  	printf("ERROR: Antes de realizar esta operación debe registrar clientes\n");
+		  	printf("=========================\n");
+		  	system("pause");
+		}
 }
 
 void regClient(FILE *cliente){
