@@ -24,13 +24,13 @@ main(){
 	FILE *turnos;
 	
 	system("cls");
-    printf("Modulo Administración\n");
+    printf("Modulo AdministraciÃ³n\n");
     printf("=========================\n");
     printf("1.- Registrar Profesional\n");
     printf("2.- Registrar Usuario Recepcionista\n");
     printf("3.- Atenciones por Profesional\n");
     printf("4.- Ranking de Profesionales por Atenciones\n");
-    printf("5.- Cerrar la aplicación\n\n");
+    printf("5.- Cerrar la aplicaciÃ³n\n\n");
     printf("Ingrese una opcion: ");
     scanf("%d", &op);
 	
@@ -150,7 +150,7 @@ void atenciones(FILE *turnos){
 				printf("ID del profesional: ");
 				printf("%d", trn.idp);
 				printf("\nFecha del turno: %d/%d/%d", trn.fec.dia, trn.fec.mes, trn.fec.anio);
-				printf("\nDNI del dueño: %d", trn.dni);
+				printf("\nDNI del dueÃ±o: %d", trn.dni);
 				printf("\nDetalle de la visita: ");
 				puts(trn.detalle);
 				fread(&trn, sizeof(Turnos), 1, turnos);
@@ -277,12 +277,12 @@ void rPro(FILE *prof){
 	          }
 	        if(aux == 0){
 	        	for(int i = 0; i < strlen(pro.User.user); i++){
-	            	if(isalnum(pro.User.user[i]) || isupper(pro.User.user[i]) || pro.User.user[i] == '+' || pro.User.user[i] == '-' || pro.User.user[i] == '/' || pro.User.user[i] == '*' || pro.User.user[i] == '?' || pro.User.user[i] == '¿' || pro.User.user[i] == '!' || pro.User.user[i] == '¡'){
+	            	if(isalnum(pro.User.user[i]) || isupper(pro.User.user[i]) || pro.User.user[i] == '+' || pro.User.user[i] == '-' || pro.User.user[i] == '/' || pro.User.user[i] == '*' || pro.User.user[i] == '?' || pro.User.user[i] == 'Â¿' || pro.User.user[i] == '!' || pro.User.user[i] == 'Â¡'){
 	            } 
 				else{
 	                aux = 1;
 	                system("cls");
-	                printf("Solo se permiten los siguientes simbolos +, -, /, *, ?, ¿, !, ¡\n");
+	                printf("Solo se permiten los siguientes simbolos +, -, /, *, ?, Â¿, !, Â¡\n");
 	                system("pause");
 	                system("cls");
 	                break;
@@ -299,14 +299,14 @@ void rPro(FILE *prof){
     	system("cls");
     	printf("Registro de un nuevo profesional\n");
 		printf("=========================\n");
-	    printf("La contraseña debe tener al menos una letra mayuscula, una letra minuscula y un numero\nLa contraseña debe tener entre 6 y 32 caracteres\nLa contraseña solo podra tener caracteres alfanumericos\nLa contraseña no debe tener mas de 3 caracteres numericos consecutivos\nLa contraseña no podra tener 2 caracteres consecutivos que refieran a letras alfabeticamente consecutivas.");
-	    printf("Ingrese una contraseña: ");
+	    printf("La contraseÃ±a debe tener al menos una letra mayuscula, una letra minuscula y un numero\nLa contraseÃ±a debe tener entre 6 y 32 caracteres\nLa contraseÃ±a solo podra tener caracteres alfanumericos\nLa contraseÃ±a no debe tener mas de 3 caracteres numericos consecutivos\nLa contraseÃ±a no podra tener 2 caracteres consecutivos que refieran a letras alfabeticamente consecutivas.");
+	    printf("Ingrese una contraseÃ±a: ");
 	    _flushall();
 	    gets(pro.User.pw);
     	if(strlen(pro.User.pw) > 32 || strlen(pro.User.pw) < 6){
         	aux = 1;
 	        system("cls");
-			printf("La contraseña debe tener entre 6 y 32 caracteres\n");
+			printf("La contraseÃ±a debe tener entre 6 y 32 caracteres\n");
 			system("pause");
 			system("cls");
     	}
@@ -328,21 +328,21 @@ void rPro(FILE *prof){
         if(contMay == 0){
         	aux = 1;
 	        system("cls");
-			printf("La contraseña debe tener al menos una letra mayuscula\n");
+			printf("La contraseÃ±a debe tener al menos una letra mayuscula\n");
 			system("pause");
 			system("cls");
         }
         if(contMin == 0){
         	aux = 1;
 	        system("cls");
-			printf("La contraseña debe tener al menos una letra minuscula\n");
+			printf("La contraseÃ±a debe tener al menos una letra minuscula\n");
 			system("pause");
 			system("cls");
         }
         if(contD == 0){
         	aux = 1;
 	        system("cls");
-			printf("La contraseña debe tener al menos un digito\n");
+			printf("La contraseÃ±a debe tener al menos un digito\n");
 			system("pause");
 			system("cls");
         }
@@ -361,7 +361,7 @@ void rPro(FILE *prof){
 	    			if(num[0] + 3 == num[3]){
 		            	aux = 1;
 				        system("cls");
-						printf("La contraseña no debe tener mas de 3 digitos consecutivos\n");
+						printf("La contraseÃ±a no debe tener mas de 3 digitos consecutivos\n");
 						system("pause");
 						system("cls");
 		            	num[3] = 0;
@@ -389,7 +389,7 @@ void rPro(FILE *prof){
 		        		if (letra[i - 1] + 1 == letra[i]){
 				            aux = 1;
 				        	system("cls");
-							printf("La contraseña debe tener al menos una letra minuscula\n");
+							printf("La contraseÃ±a debe tener al menos una letra minuscula\n");
 							system("pause");
 							system("cls");
 		              		break;
@@ -400,7 +400,7 @@ void rPro(FILE *prof){
 	        		if(ispunct(pro.User.pw[j]) || isspace(pro.User.pw[j])){
 	            			aux = 1;
 				        	system("cls");
-							printf("La contraseña no puede contener signos de puntuacion, ni espacios\n");
+							printf("La contraseÃ±a no puede contener signos de puntuacion, ni espacios\n");
 							system("pause");
 							system("cls");
 	        		}
@@ -501,12 +501,12 @@ void rRep(FILE *usr){
 	          }
 	        if(aux == 0){
 	        	for(int i = 0; i < strlen(user.user); i++){
-	            	if(isalnum(user.user[i]) || isupper(user.user[i]) || user.user[i] == '+' || user.user[i] == '-' || user.user[i] == '/' || user.user[i] == '*' || user.user[i] == '?' || user.user[i] == '¿' || user.user[i] == '!' || user.user[i] == '¡'){
+	            	if(isalnum(user.user[i]) || isupper(user.user[i]) || user.user[i] == '+' || user.user[i] == '-' || user.user[i] == '/' || user.user[i] == '*' || user.user[i] == '?' || user.user[i] == 'Â¿' || user.user[i] == '!' || user.user[i] == 'Â¡'){
 	            } 
 				else{
 	                aux = 1;
 	                system("cls");
-	                printf("Solo se permiten los siguientes simbolos +, -, /, *, ?, ¿, !, ¡\n");
+	                printf("Solo se permiten los siguientes simbolos +, -, /, *, ?, Â¿, !, Â¡\n");
 	                system("pause");
 	                system("cls");
 	                break;
@@ -523,14 +523,14 @@ void rRep(FILE *usr){
     	system("cls");
     	printf("Registro de un nuevo usuario recepcionista\n");
 		printf("=========================\n");
-	    printf("La contraseña debe tener al menos una letra mayuscula, una letra minuscula y un numero\nLa contraseña debe tener entre 6 y 32 caracteres\nLa contraseña solo podra tener caracteres alfanumericos\nLa contraseña no debe tener mas de 3 caracteres numericos consecutivos\nLa contraseña no podra tener 2 caracteres consecutivos que refieran a letras alfabeticamente consecutivas.");
-	    printf("Ingrese una contraseña: ");
+	    printf("La contraseÃ±a debe tener al menos una letra mayuscula, una letra minuscula y un numero\nLa contraseÃ±a debe tener entre 6 y 32 caracteres\nLa contraseÃ±a solo podra tener caracteres alfanumericos\nLa contraseÃ±a no debe tener mas de 3 caracteres numericos consecutivos\nLa contraseÃ±a no podra tener 2 caracteres consecutivos que refieran a letras alfabeticamente consecutivas.");
+	    printf("Ingrese una contraseÃ±a: ");
 	    _flushall();
 	    gets(user.pw);
     	if(strlen(user.pw) > 32 || strlen(user.pw) < 6){
         	aux = 1;
 	        system("cls");
-			printf("La contraseña debe tener entre 6 y 32 caracteres\n");
+			printf("La contraseÃ±a debe tener entre 6 y 32 caracteres\n");
 			system("pause");
 			system("cls");
     	}
@@ -552,21 +552,21 @@ void rRep(FILE *usr){
         if(contMay == 0){
         	aux = 1;
 	        system("cls");
-			printf("La contraseña debe tener al menos una letra mayuscula\n");
+			printf("La contraseÃ±a debe tener al menos una letra mayuscula\n");
 			system("pause");
 			system("cls");
         }
         if(contMin == 0){
         	aux = 1;
 	        system("cls");
-			printf("La contraseña debe tener al menos una letra minuscula\n");
+			printf("La contraseÃ±a debe tener al menos una letra minuscula\n");
 			system("pause");
 			system("cls");
         }
         if(contD == 0){
         	aux = 1;
 	        system("cls");
-			printf("La contraseña debe tener al menos un digito\n");
+			printf("La contraseÃ±a debe tener al menos un digito\n");
 			system("pause");
 			system("cls");
         }
@@ -585,7 +585,7 @@ void rRep(FILE *usr){
 	    			if(num[0] + 3 == num[3]){
 		            	aux = 1;
 				        system("cls");
-						printf("La contraseña no debe tener mas de 3 digitos consecutivos\n");
+						printf("La contraseÃ±a no debe tener mas de 3 digitos consecutivos\n");
 						system("pause");
 						system("cls");
 		            	num[3] = 0;
@@ -613,7 +613,7 @@ void rRep(FILE *usr){
 		        		if (letra[i - 1] + 1 == letra[i]){
 				            aux = 1;
 				        	system("cls");
-							printf("La contraseña debe tener al menos una letra minuscula\n");
+							printf("La contraseÃ±a debe tener al menos una letra minuscula\n");
 							system("pause");
 							system("cls");
 		              		break;
@@ -624,7 +624,7 @@ void rRep(FILE *usr){
 	        		if(ispunct(user.pw[j]) || isspace(user.pw[j])){
 	            			aux = 1;
 				        	system("cls");
-							printf("La contraseña no puede contener signos de puntuacion, ni espacios\n");
+							printf("La contraseÃ±a no puede contener signos de puntuacion, ni espacios\n");
 							system("pause");
 							system("cls");
 	        		}
