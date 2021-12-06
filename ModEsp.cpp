@@ -19,16 +19,16 @@ void login(FILE *prof);
 void Lista(FILE *turnos);
 void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr);
 
-main(){
-	setlocale(LC_ALL, "spanish");
-	int op;
-	FILE *prof;
-	FILE *usr;
-	FILE *client;
+main(){ 
+	setlocale(LC_ALL, "spanish"); 
+	int op; 
+	FILE *prof; 
+	FILE *usr; 
+	FILE *client; 
 	FILE *turnos;
 	system("cls");
-    printf("Modulo Espacios\n");
-    printf("=========================\n");
+    printf("Modulo Espacios\n"); 
+    printf("=========================\n"); 
     if(!logged){
     	printf("No inicio sesión\n");
 	}
@@ -50,7 +50,7 @@ main(){
 			break;
 		}
 		case 2:{
-			system("cls");
+			system("cls"); 
     		Lista(turnos);
     		main();
 			break;
@@ -71,7 +71,7 @@ main(){
 			printf("Ingrese una opcion valida");
 			main();
 			break;
-		}
+		} 
 	}
 	
 	return 0;
@@ -87,7 +87,7 @@ void Lista(FILE *turnos){
 		else{
 			printf("Lista de turnos\n");
 			printf("=========================\n");
-			Turnos trn;
+			Turnos trn; 
 			rewind(turnos);
 			int s=0;
 			fread(&trn, sizeof(Turnos), 1, turnos);
@@ -104,9 +104,11 @@ void Lista(FILE *turnos){
 		}
 		fclose(turnos);
 		printf("\n\n");
+		
 		system("pause");
   	}
 	else{
+		
     system("cls");
     printf("ERROR: usted no inicio sesión\n");
 	printf("=========================\n");
@@ -136,11 +138,12 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 	else{
     	archs++;
     }
-    if(cliente == NULL){
+    if(cliente == NULL){ 
     	printf ("ERROR: No se pudo abrir el archivo Clientes.dat");
     }
 	else{
-    	archs++;
+    	archs++; 
+		
     }
     if(archs == 3){
     	do{
@@ -171,9 +174,10 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
         	scanf("%d", &mat);
         	turno.idp = mat;
         	rewind(prof);
+		
         	fread(&pro, sizeof(Profesionales), 1, prof);
         	while (!feof(prof)){
-        		if(turno.idp == pro.idp){
+        		if(turno.idp == pro.idp){ 
             		match++;
         		}
         		fread(&pro, sizeof(Profesionales), 1, prof);
@@ -203,9 +207,9 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
             		printf("DNI del cliente: %d\n\n", clienT.dni);
             		fread(&clienT, sizeof(Cliente), 1, cliente);
           		}
-          		busc = clienT;
+          		busc = clienT; 
           		Cliente temp;
-          		printf("\nIngrese el DNI del cliente: ");
+          		printf("\nIngrese el DNI del cliente: "); 
           		int dniA;
           		scanf("%d", &dniA);
           		rewind(cliente);
@@ -228,7 +232,7 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 	          		while(!feof(cliente)){
 	            		countM++;
 	            		fread(&clienT, sizeof(Cliente), 1, cliente);
-	          		}
+	          		} 
 	          		Cliente auxMsc[countM];
 	          		rewind(cliente);
 	          		fread(&clienT, sizeof(Cliente), 1, cliente);
@@ -239,6 +243,7 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 	            		c2++;
 	        		}	          
 	          		rewind(prof);
+				
           			fread(&pro, sizeof(Profesionales), 1, prof);
 		          	while(!feof(prof)){
 		            	count++;
@@ -262,13 +267,13 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 					for(int i = 0; i < count; i++) {
 						fwrite(&proAux[i], sizeof(Profesionales), 1, proTemp);
 					}
-					fclose(prof);
+					fclose(prof); 
 					if(remove("Profesionales.dat") != 0){
 						perror("ERROR");
 						system("pause");
 					}
 					fclose(proTemp);
-					if(rename("AuxTemp.dat", "Profesionales.dat") != 0){
+					if(rename("AuxTemp.dat", "Profesionales.dat") != 0){ 
 						perror("ERROR");
 						system("pause");
 					}
@@ -309,7 +314,7 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 					for(int i = 0; i < c3; i++) {
 						fwrite(&vecT[i], sizeof(turno), 1, turTemp);
 					}
-						
+						 
 					fclose(turnos);
 					if(remove("Turnos.dat") != 0){
 						perror("ERROR: ");
@@ -336,8 +341,8 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 			        }
         			}
 					else{
-			        	system("cls");
-						printf("--> ERROR: La matricula ingresada es inexistente.\n");
+			        	system("cls"); 
+						printf("--> ERROR: La ID de profesional ingresada es inexistente.\n"); 
 						printf("=========================\n");
 			        	system("pause");
 			        	err = 1;
@@ -373,10 +378,11 @@ void login(FILE *prof){
     		printf("Ingrese el ID de usuario: ");
     		gets(asis.User.user);
     		rewind(prof);
-    		fread(&busc, sizeof(Profesionales), 1, prof);
+    		fread(&busc, sizeof(Profesionales), 1, prof); 
     		int match = 0;
     		Profesionales aux;
 	    	while (!feof(prof)){
+			
 	    		if (strcmp(asis.User.user, busc.User.user) == 0){
 	        		match++;
 	    			aux = busc;
@@ -388,7 +394,7 @@ void login(FILE *prof){
 	        	system("cls");
 	        	printf("Iniciar Sesion\n");
 				printf("=========================\n");
-				_flushall();
+				_flushall(); 
 	        	printf("Ingrese la contraseña: ");
 	        	gets(asis.User.pw);
 	        	if (strcmp(asis.User.pw, aux.User.pw) == 0) {
@@ -398,7 +404,7 @@ void login(FILE *prof){
 	          	asis = aux;
 	          	system("cls");
 	          	printf("Sesion iniciada con exito\n");
-				printf("=========================\n");
+				printf("=========================\n"); 
 				logg = asis;
 	          	printf("Bienvenido %s\n\n\n\n", asis.User.apenom);
 	          	logged = true;
@@ -406,7 +412,7 @@ void login(FILE *prof){
 				else{
 	          	err = 1;
 	          	system("cls");
-	          	printf("Contraseña incorrecta\n");
+	          	printf("Contraseña incorrecta\n"); 
 				printf("=========================\n");
 	          	system("pause");
 	    		}
