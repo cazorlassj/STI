@@ -4,14 +4,15 @@
 #include <locale.h>
 #include <ctype.h>
 #include <time.h>
+#include <wchar.h>
 #include <algorithm>
 #include <iostream>
 #include "libreria.h"
 using namespace std;
 bool logged = false;
-Usuarios logg;
+Usuarios logg; 
 
-void login(FILE *usr);
+void login(FILE *usr); 
 void regClient(FILE *cliente);
 void regTurn(FILE *turnos, FILE *prof);
 void Listado(FILE *turnos);
@@ -19,19 +20,19 @@ int cantclient = 0;
 
 main(){
 	int op;
-	FILE *usr;
-	FILE *cliente;
-	FILE *prof;
-	FILE *turnos;
-	setlocale(LC_ALL, "spanish");
-	system("cls");
+	FILE *usr; 
+	FILE *cliente; 
+	FILE *prof; 
+	FILE *turnos; 
+	setlocale(LC_ALL, "spanish"); 
+	system("cls"); 
     printf("Modulo del recepcionista\n");
-    printf("=========================\n");
+    printf("=========================\n"); 
     if(!logged){
     	printf("No inicio sesión\n");
 	}
 	else{
-		printf("Usuario Actual: %s\n\n\n\n", logg.apenom);
+		printf("Usuario Actual: %s\n\n\n\n", logg.apenom); 
 	}
     printf("1.- Iniciar sesion\n");
     printf("2.- Registrar cliente\n");
@@ -48,9 +49,9 @@ main(){
 			break;
 		}
 		case 2:{
-			system("cls");
+			system("cls"); 
     		regClient(cliente);
-    		main();
+    		main(); 
 			break;
 		}
 		case 3:{
@@ -60,20 +61,20 @@ main(){
 			break;
 		}
 		case 4:{
-			system("cls");
-    		Listado(turnos);
-    		main();
+			system("cls"); 
+    		Listado(turnos); 
+    		main(); 
 			break;
 		}
 		case 5:{
-			system("cls");
-			chau();
-			break;
+			system("cls"); 
+			chau(); 
+			break; 
 		}
 		default:{
-			system("cls");
-			printf("Ingrese una opcion valida");
-			main();
+			system("cls"); 
+			printf("Ingrese una opcion valida"); 
+			main(); 
 			break;
 		}
 	}
@@ -82,9 +83,9 @@ main(){
 
 void Listado(FILE *turnos){
 	if(logged){
-    	turnos = fopen("Turnos.dat", "r+b");
+    	turnos = fopen("Turnos.dat", "r+b"); 
     if(turnos == NULL){
-      	printf ("ERROR: No se pudo abrir el archivo Turnos.dat");
+      	printf ("ERROR: No se pudo abrir el archivo Turnos.dat"); 
     }
 	else{
       	system("cls");
@@ -92,7 +93,7 @@ void Listado(FILE *turnos){
       	Profesionales pro;
       	rewind(turnos);
       	fread(&turns, sizeof(Turnos), 1, turnos);
-      	while (!feof(turnos)) {
+      	while (!feof(turnos)){ 
         	printf("ID del profesional: %d\n", turns.idp);
         	printf("Dia del turno: %d/%d/%d\n", turns.fec.dia, turns.fec.mes, turns.fec.anio);
         	printf("Detalle del turno: ");
@@ -112,17 +113,17 @@ void Listado(FILE *turnos){
   	fclose(turnos);
   	system("pause");
 }
-
+ 
 void regTurn(FILE *turnos, FILE *prof){
 	if(cantclient > 0){
     	if(logged){
 	      	system("cls");
 	      	turnos = fopen("Turnos.dat", "a+b");
 	      	prof = fopen("Profesionales.dat", "r+b");
-	    	if(prof == NULL){
+	    	if(prof == NULL){ 
 	       		printf ("ERROR: No se pudo abrir el archivo Profesionales.dat");
 	      	}
-	      	if(turnos == NULL){
+	      	if(turnos == NULL){ 
 	        	printf ("ERROR: No se pudo abrir el archivo Turnos.dat");
 	      	}
       		else{
@@ -141,7 +142,7 @@ void regTurn(FILE *turnos, FILE *prof){
 	          printf("ID de profesional: %d\n\n", pro.idp);
 	          fread(&pro, sizeof(Profesionales), 1, prof);
 	        }
-	        printf("\nIngrese la ID del profesional: ");
+	        printf("\nIngrese la ID del profesional: "); 
 	        scanf("%d", &turns.idp);
 	        rewind(prof);
 	        while (!feof(prof)){
@@ -158,7 +159,7 @@ void regTurn(FILE *turnos, FILE *prof){
 	          	scanf("%d", &turns.fec.mes);
 	          	printf("\nAño: ");
 	          	scanf("%d", &turns.fec.anio);
-	          	printf("Ingrese el DNI del dueño de la mascota: ");
+	          	printf("Ingrese el DNI del cliente: ");
 	          	scanf("%d", &turns.dni);
 	          	printf("Ingrese el detalle de la atencion: ");
 	          	_flushall();
@@ -178,12 +179,12 @@ void regTurn(FILE *turnos, FILE *prof){
 	    }
 		else{
 		    system("cls");
-		    printf("ERROR: usted no inicio sesión\n");
+		    printf("ERROR: usted no inicio sesión\n"); 
 			printf("=========================\n");
 		    system("pause");
 	  	}
 		}
-		else{
+		else{ 
 			system("cls");
 		  	printf("ERROR: Antes de realizar esta operación debe registrar clientes\n");
 		  	printf("=========================\n");
@@ -195,12 +196,12 @@ void regClient(FILE *cliente){
  	if(logged){
 	    system("cls");
 	    cliente = fopen("Clientes.dat", "a+b");
-	    if(cliente == NULL){
+	    if(cliente == NULL){ 
 	    	printf("ERROR: No se pudo abrir el archivo Clientes.dat");
 	    } 
 		else{
 	    	Cliente clienT;
-	      	printf("Registrar cliente\n");
+	      	printf("Registrar cliente\n"); 
 	      	printf("=========================\n");
 	      	printf("\nIngrese el apellido y nombre del cliente: ");
 	      	_flushall();
@@ -222,13 +223,13 @@ void regClient(FILE *cliente){
 	      	scanf("%d", &clienT.fec.anio);
 	      	fwrite(&clienT, sizeof(Cliente), 1, cliente);
 	      	cantclient++;
-	    }
+	    } 
 	    fclose(cliente);
 	    printf("\n\n");
 	    system("pause");
   	}
 	else{
-    	system("cls");
+    	system("cls"); 
     	printf("ERROR: usted no inicio sesión\n");
 		printf("=========================\n");
     	system("pause");

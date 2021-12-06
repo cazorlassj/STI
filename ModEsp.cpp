@@ -226,15 +226,15 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 					rewind(cliente);
           			fread(&clienT, sizeof(Cliente), 1, cliente);
 	          		while(!feof(cliente)){
-	            		countM++;
+	            		countM++; 
 	            		fread(&clienT, sizeof(Cliente), 1, cliente);
-	          		}
+	          		} 
 	          		Cliente auxMsc[countM];
-	          		rewind(cliente);
+	          		rewind(cliente); 
 	          		fread(&clienT, sizeof(Cliente), 1, cliente);
-	          		int c2=0;
-	          		while(!feof(cliente)){
-	            		auxMsc[c2] = clienT;
+	          		int c2=0; 
+	          		while(!feof(cliente)){ 
+	            		auxMsc[c2] = clienT; 
 	            		fread(&clienT, sizeof(Cliente), 1, cliente);
 	            		c2++;
 	        		}	          
@@ -273,7 +273,7 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 						system("pause");
 					}
 					fclose(turnos);
-	            	system("cls");
+	            	system("cls"); 
 	            	prof = fopen("Profesionales.dat", "r+b");
 	            	turnos = fopen("Turnos.dat", "a+b");
 	            	char rep[380];
@@ -290,25 +290,25 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 			        	count++;
 			        	fread(&tmpT, sizeof(turno), 1, turnos);
 			        }
-	         		Turnos vecT[count];
-					int c3=0;
+	         		Turnos vecT[count]; 
+					int c3=0; 
 					rewind(turnos);
 					fread(&tmpT, sizeof(turno), 1, turnos);
 	          		while(!feof(turnos)){
 	            		vecT[c3] = tmpT;
 	            		fread(&tmpT, sizeof(turno), 1, turnos);
 	            		c3++;
-	          		}
+	          		} 
 					for(int i = 0; i < c3; i++){
 						if(vecT[i].dni == dniA){
 								strcpy(vecT[i].detalle, rep);
 						}
-					}
+					} 
 					turTemp = fopen("TurAux.dat", "w+b");
 						
 					for(int i = 0; i < c3; i++) {
 						fwrite(&vecT[i], sizeof(turno), 1, turTemp);
-					}
+					}  
 						
 					fclose(turnos);
 					if(remove("Turnos.dat") != 0){
@@ -333,11 +333,11 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
 						printf("=========================\n");
 			            system("pause");
 			            err = 1;
-			        }
-        			}
+			        } 
+        			} 
 					else{
 			        	system("cls");
-						printf("--> ERROR: La matricula ingresada es inexistente.\n");
+						printf("--> ERROR: La ID de profesional ingresada es inexistente.\n");
 						printf("=========================\n");
 			        	system("pause");
 			        	err = 1;
