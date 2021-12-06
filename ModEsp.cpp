@@ -4,6 +4,7 @@
 #include <locale.h>
 #include <windows.h>
 #include <iostream>
+#include <wchar.h>
 #include <chrono>
 #include <time.h>
 #include <unistd.h>
@@ -165,7 +166,7 @@ void Evol(FILE *turnos, FILE *prof, FILE *cliente, FILE *usr){
         		printf("ID de profesional: %d\n", pro.idp);
         		fread(&pro, sizeof(Profesionales), 1, prof);
         	}
-        	printf("\nIngrese la matricula del veterinario: ");
+        	printf("\nIngrese la ID del profesional: ");
         	int mat;
         	scanf("%d", &mat);
         	turno.idp = mat;
